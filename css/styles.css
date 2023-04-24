@@ -14,14 +14,14 @@
 }
 
 body {
-    background-color: darkgray;
+    background-color: #f4f4f4;
 }
 
 .app {
     display: block;
     width: 100%;
     height: 98vh;
-    background-color: darkgray;
+    background-color: #f4f4f4;
 }
 
 

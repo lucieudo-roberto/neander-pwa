@@ -33,7 +33,7 @@ const app = {
         
         RAM.forEach((x,i)=>{
             if (blink > 0 && i == blink ) {
-                 out.innerHTML += `<i style='background:orange' id='rgi_${i}' class='r-g-i'>${x}</i>`;
+                 out.innerHTML += `<i style='background:#6eb8f5' id='rgi_${i}' class='r-g-i'>${x}</i>`;
             }else {
                  out.innerHTML += `<i id='rgi_${i}' class='r-g-i'>${x}</i>`;
             }
