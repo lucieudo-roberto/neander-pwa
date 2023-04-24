@@ -8,7 +8,7 @@
 var MXD = 135 // quantidade máxima de ram
 var ACM = 0   // acumulador
 var CPC = 0 
-var PWR = 0   // power button
+var PWR = 0   // true: ligado , false: desligado
 
 var RAM = new Array(MXD).fill(0)
 
@@ -69,19 +69,16 @@ const app = {
         let cpvalue = this._id("cp-val")
         let infinti = this._id("pe-val")
         
+        
         let cell = 0
         let infint = 0;
-       
-       var control = setInterval(()=> {
-           if (!PWR) { 
-               neander.ac = 0;
-               infint = 0;
-               cell = 0;
-               stbnt.innerText = (stbnt.innerText == 'START') ? "STOP" : "START"
-               clearInterval(control)
-           }
-           
-           
+  
+  PWR = ! PWR
+  stbnt.innerText = (stbnt.innerText == 'START') ? "STOP" : "START"
+
+  if ( PWR ==  true ) {
+      var control = setInterval(()=> {
+           if ( PWR == false ) clearInterval(control);
            let byte = this._h2d(RAM[cell]);
            this.print_ram(cell)
 
@@ -97,7 +94,8 @@ const app = {
                     neander.ac = 0;
                     infint = 0;
                     cell = 0;
-                    stbnt.innerText = (stbnt.innerText == 'START') ? "STOP" : "START"
+                    PWR = false
+                    stbnt.innerText = 'START'
                     clearInterval(control);
                     return;
                 }
@@ -115,9 +113,5 @@ const app = {
             if ( cell == RAM.length ) { cell = 0;}
 
         },speed) 
-        
-        
-        PWR = ~ PWR
-        stbnt.innerText = (stbnt.innerText == 'START') ? "STOP" : "START"
-    } 
-}
+  }
+}}
