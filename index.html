@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>neander_web</title>
+</head>
+<body>
+    <main class="app">
+        <div class="cpu-status">
+            <div class="status">
+                <p class="cpu-st">ACUMULADOR: <span id="ac-val">0</span></p>
+                <p class="cpu-st">CONTADOR P: <span id="cp-val">0</span></p>
+                <p class="cpu-st">VALOR DO E: <span id="pe-val">0</span></p>
+            </div>
+            <input class="cpu-time" id="cpu-time" type="range" mim="0" max="2000"/>
+            <p id="logs" class="logs">bem vindo ao neander web</p>
+        </div>
+        
+        <header>
+            <div id="ram-grafic" class="ram-grafic">
+                <script>
+                    for (let x=0; x<135; x++ ) {
+                        document.write(`<i id='rgi_${x}' class='r-g-i'>0</i>`);
+                    }
+                </script>
+            </div>
+        </header>
+        <section class='code-area'>
+            <div class='numbers' id='numb'>
+                <script>
+                    for (let x=1; x<50; x++){
+                        document.write(`<i class='line-nb'>${x}</i>`)
+                    }
+                </script>
+            </div>
+            <code id="code" class="editor" contenteditable></code>
+        </section>
+        
+        <footer class="actions">
+            <button id="write" onclick="app.write_ram()">WRITE</button>
+            <button id="exect" onclick="app.exect_cod()">START</button>
+            <button id="clean" onclick="app.clean_ram()">CLEAN</button>
+        </footer>
+    </main>
+
+    <script src="src/parsing.js"></script>
+    <script src="src/compiler.js"></script>
+    <script src="src/main.js"></script>
+    <script src="src/neander.js"></script>
+    
+    
+    
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- script>
+    /*
+      nop: 0 √
+      sta: 1 √
+      lda: 2 √
+      add: 3 √
+      or:  4 √
+      and: 5 √
+      not: 6 √
+      jmp: 8 √
+      jn:  9 √
+      jz: 10 √
+      jnz:11 √
+      hlt:15 √
+    
+    */
+     
+      var RAM = [10,20,30,40,1];
+      
+      neander.ula(RAM[0])
+      
+      // -20+10
+      
+      console.log(neander.ac)
+      console.log(RAM[1])
+
+    </script -->
+
+</body>
+</html>
