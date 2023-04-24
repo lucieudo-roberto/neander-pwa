@@ -32,7 +32,7 @@ const app = {
         let out = this._id('ram-grafic'); out.innerHTML = '';
         
         RAM.forEach((x,i)=>{
-            if (blink > 0 && i == blink ) {
+            if (blink >= 0 && i == blink ) {
                  out.innerHTML += `<i style='background:#6eb8f5' id='rgi_${i}' class='r-g-i'>${x}</i>`;
             }else {
                  out.innerHTML += `<i id='rgi_${i}' class='r-g-i'>${x}</i>`;
@@ -72,21 +72,32 @@ const app = {
         let cell = 0
         let infint = 0;
        
-
-        var control = setInterval(()=>{
+       var control = setInterval(()=> {
+           if (!PWR) { 
+               neander.ac = 0;
+               infint = 0;
+               cell = 0;
+               stbnt.innerText = (stbnt.innerText == 'START') ? "STOP" : "START"
+               clearInterval(control)
+           }
+           
+           
            let byte = this._h2d(RAM[cell]);
            this.print_ram(cell)
 
             state = neander.ula(byte);
             
             if ( state == true) {
-                logss.innerText = 'wating operand'
+                logss.innerText = 'esperando operando'
                 cell += 1;
             }
             if ( typeof state == 'string' ) {
                 if (state == 'stop') {
-                    logss.innerText =' PG Finish..'
+                    logss.innerText ='programa finalizado..'
                     neander.ac = 0;
+                    infint = 0;
+                    cell = 0;
+                    stbnt.innerText = (stbnt.innerText == 'START') ? "STOP" : "START"
                     clearInterval(control);
                     return;
                 }
@@ -96,12 +107,12 @@ const app = {
                 cell = byte;
             }
             
-            
             acvalue.innerText = neander.ac;
             cpvalue.innerText = cell;
             infinti.innerText = infint;
-            if (!PWR) clearInterval(control);
             infint++;
+            
+            if ( cell == RAM.length ) { cell = 0;}
 
         },speed) 
         

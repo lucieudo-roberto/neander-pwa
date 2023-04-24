@@ -29,7 +29,7 @@ const neander = {
                     RAM[byte] = this.d2h(this.ac);
                     this.last_command = false
                     this.wait_operand = false
-                    return 'acumulador recebe da ram'
+                    return 'acumulador => ram'
                 }
             break;
             
@@ -55,7 +55,7 @@ const neander = {
                     this.ac += this.h2d(RAM[byte]);
                     this.last_command = false
                     this.wait_operand = false
-                    return 'acumulador <+ ram'
+                    return 'acumulador + ram'
                 }
             break;
             
@@ -87,7 +87,7 @@ const neander = {
             
             case 6: // not
                 this.ac = ~ this.ac;
-                return 'bits do acumulador invertidos'
+                return 'acumulador <>'
             break;
             
             case 8: // jmp
