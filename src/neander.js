@@ -11,7 +11,7 @@ const neander = {
     last_command : false,
     
     h2d : h => parseInt(h, 16),
-    d2h: d => (+d).toString(16),
+    d2h : d => (+d).toString(16),
     
     ula : function(byte) {
         

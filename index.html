@@ -38,61 +38,16 @@
                     }
                 </script>
             </div>
-            <code id="code" class="editor" contenteditable></code>
+            <code id="code" class="editor" contenteditable aria-autocomplete></code>
         </section>
         
         <footer class="actions">
-            <button id="write" onclick="app.write_ram()">WRITE</button>
-            <button id="exect" onclick="app.exect_cod()">START</button>
-            <button id="clean" onclick="app.clean_ram()">CLEAN</button>
+            <button id="write" onclick="read_code()">RUN</button>
         </footer>
     </main>
 
-    <script src="src/parsing.js"></script>
-    <script src="src/compiler.js"></script>
-    <script src="src/main.js"></script>
-    <script src="src/neander.js"></script>
-    
-    
-    
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!-- script>
-    /*
-      nop: 0 √
-      sta: 1 √
-      lda: 2 √
-      add: 3 √
-      or:  4 √
-      and: 5 √
-      not: 6 √
-      jmp: 8 √
-      jn:  9 √
-      jz: 10 √
-      jnz:11 √
-      hlt:15 √
-    
-    */
-     
-      var RAM = [10,20,30,40,1];
-      
-      neander.ula(RAM[0])
-      
-      // -20+10
-      
-      console.log(neander.ac)
-      console.log(RAM[1])
-
-    </script -->
-
+    <script src="src/code_prepare.js"></script>
+    <script src="src/code_compile.js"></script>
+    <script src="src/index.js"></script>
 </body>
 </html>

@@ -61,6 +61,8 @@ const app = {
     },
     
     exect_cod : function() {
+        
+        let loop_ctl = false; // controle do loop principal
         let speed = this._id('cpu-time').value
         let stbnt = this._id('exect')
         let logss = this._id('logs')
@@ -76,7 +78,13 @@ const app = {
   PWR = ! PWR
   stbnt.innerText = (stbnt.innerText == 'START') ? "STOP" : "START"
 
-  if ( PWR ==  true ) {
+        if ( PWR ==  true ) {
+            while(loop_ctl) {
+                
+            }
+      
+      
+      
       var control = setInterval(()=> {
            if ( PWR == false ) clearInterval(control);
            let byte = this._h2d(RAM[cell]);
