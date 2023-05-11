@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,18 +15,21 @@
         <div class="cpu-status">
             <div class="status">
                 <p class="cpu-st">ACUMULADOR: <span id="ac-val">0</span></p>
-                <p class="cpu-st">CONTADOR P: <span id="cp-val">0</span></p>
-                <p class="cpu-st">VALOR DO E: <span id="pe-val">0</span></p>
+                <p class="cpu-st">ENDEREÇO P: <span id="cp-val">0</span></p>
+                <p class="cpu-st">VALOR DO P: <span id="pe-val">0</span></p>
             </div>
             <input class="cpu-time" id="cpu-time" type="range" value="500" mim="30" max="5000"/>
             <p id="logs" class="logs">bem vindo ao neander web</p>
+            <section class="variables">
+                <input type="text" id="vars" class="input-vars" value="dicas: {end:valor} , {80:10} {81:20}"/>
+            </section>
         </div>
         
         <header>
             <div id="ram-grafic" class="ram-grafic">
                 <script>
                     for (let x=0; x<135; x++ ) {
-                        document.write(`<i id='rgi_${x}' class='r-g-i'>0</i>`);
+                        document.write('<i class="r-g-i">0</i>');
                     }
                 </script>
             </div>
@@ -40,14 +44,20 @@
             </div>
             <code id="code" class="editor" contenteditable aria-autocomplete></code>
         </section>
-        
+     
         <footer class="actions">
-            <button id="write" onclick="read_code()">RUN</button>
+            <button id="run-bnt" onclick="read_code()">RUN</button>
         </footer>
     </main>
-
+    
+    <script src="src/neander.js"></script>
     <script src="src/code_prepare.js"></script>
     <script src="src/code_compile.js"></script>
     <script src="src/index.js"></script>
+    
+    <!-- 
+        by: lucieudo.roberto@gmail.com 2023
+        dont remove credits
+    -->
 </body>
 </html>

@@ -13,23 +13,23 @@ const neander = {
     h2d : h => parseInt(h, 16),
     d2h : d => (+d).toString(16),
     
-    ula : function(byte) {
+    run : function(byte) {
         
        opcode = (this.wait_operand) ? this.last_command : byte
         
         switch(opcode) {
-            case 0: return 'sem operação'; break;
+            
             
             case 1: // sta
                 if (this.wait_operand == false) {
                     this.wait_operand = true;
                     this.last_command = byte;
-                    return true
+                    return 10
                 } else {
-                    RAM[byte] = this.d2h(this.ac);
+                    //RAM[byte] = this.d2h(this.ac);
                     this.last_command = false
                     this.wait_operand = false
-                    return 'acumulador => ram'
+                    return 'a2r'
                 }
             break;
             
@@ -37,12 +37,12 @@ const neander = {
                 if (this.wait_operand == false) {
                     this.wait_operand = true;
                     this.last_command = byte;
-                    return true
+                    return 10
                 }else {
-                    this.ac = this.h2d(RAM[byte]);
+                   // this.ac = this.h2d(RAM[byte]);
                     this.last_command = false
                     this.wait_operand = false
-                    return 'acumulador <= ram'
+                    return 'r2a'
                 }
             break;
             
@@ -50,12 +50,12 @@ const neander = {
                 if (this.wait_operand == false) {
                     this.wait_operand = true;
                     this.last_command = byte;
-                    return true
+                    return 10
                 } else {
-                    this.ac += this.h2d(RAM[byte]);
+                    //this.ac += this.h2d(RAM[byte]);
                     this.last_command = false
                     this.wait_operand = false
-                    return 'acumulador + ram'
+                    return 'aAr'
                 }
             break;
             
@@ -63,12 +63,12 @@ const neander = {
                 if (this.wait_operand == false) {
                     this.wait_operand = true;
                     this.last_command = byte;
-                    return true
+                    return 10
                 } else {
-                    this.ac = ( this.ac | this.h2d(RAM[byte]) )
+                   // this.ac = ( this.ac | this.h2d(RAM[byte]) )
                     this.last_command = false
                     this.wait_operand = false
-                    return 'acumulador | ram'
+                    return 'aOr'
                 }
             break;
             
@@ -76,29 +76,29 @@ const neander = {
                 if (this.wait_operand == false) {
                     this.wait_operand = true;
                     this.last_command = byte;
-                    return true
+                    return 10
                 } else {
                     this.ac = (this.ac & this.h2d(RAM[byte]))
                     this.last_command = false
                     this.wait_operand = false
-                    return 'acumulador & ram'
+                    return 'aEr'
                 }
             break;
             
             case 6: // not
                 this.ac = ~ this.ac;
-                return 'acumulador <>'
+                return 30
             break;
             
             case 8: // jmp
                 if (this.wait_operand == false) {
                     this.wait_operand = true;
                     this.last_command = byte;
-                    return true
+                    return 10
                 } else {
                     this.last_command = false
                     this.wait_operand = false
-                    return this.h2d(RAM[byte])
+                    return 'jmp'
                 }
             break;
             
@@ -106,12 +106,12 @@ const neander = {
                 if (this.wait_operand == false) {
                     this.wait_operand = true;
                     this.last_command = byte;
-                    return true
+                    return 10
                 } else {
                     this.last_command = false
                     this.wait_operand = false
-                    if (this.ac < 0) return this.h2d(RAM[byte]);
-                    return 'próximo passo';
+                    if (this.ac < 0) return 'jmp';
+                    return 10;
                 }
             break;
             
@@ -119,12 +119,12 @@ const neander = {
                 if (this.wait_operand == false) {
                     this.wait_operand = true;
                     this.last_command = byte;
-                    return true
+                    return 10
                 } else {
                     this.last_command = false
                     this.wait_operand = false
-                    if ( this.ac == 0 ) return this.h2d(RAM[byte]);
-                    return 'próximo passo';
+                    if ( this.ac == 0 ) return 'jmp';
+                    return 10;
                 }
             break;
             
@@ -132,21 +132,19 @@ const neander = {
                 if (this.wait_operand == false) {
                     this.wait_operand = true;
                     this.last_command = byte;
-                    return true
+                    return 10
                 } else {
                     this.last_command = false
                     this.wait_operand = false
-                    if (this.ac != 0) return this.h2d(RAM[byte]);
-                    return 'próximo passo';
+                    if (this.ac != 0) return 'jmp';
+                    return 10;
                 }
             break;
             
-            case 15: // hlt
-                return 'stop'
-            break;
-            case 16: // label
-                return 'ponto de referência'
-            break;
+            case 0:   return 20; break;
+            case 15:  return 40; break;
+            case 16:  return 60; break;
+            case 128: return 50; break;
         }
     }
     

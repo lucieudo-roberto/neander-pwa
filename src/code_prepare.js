@@ -1,5 +1,4 @@
 
-
 /*
   by: lucieudo.roberto@gmail.com 2023
   dont remove credits
@@ -51,6 +50,7 @@ const code_prepare = {
     
     analize_sintax : function(raw_code) {
         let line_raw;
+        let commands = 0;
         let LABELS = {};
         let SUGARS = {};
     
@@ -63,19 +63,22 @@ const code_prepare = {
                                return `rótulo duplicado!`;
                            }
                            let label_name = line_raw[0].substr(0, line_raw[0].length - 1)
-                           LABELS[label_name] = line;
+                           LABELS[label_name] = commands;
                        }
                        else if (COMMDS[line_raw[0]] == undefined) {
                            return `comando inválido`;
                        }
+                       commands += 1;
                        break;
+                   case 2:
+                        commands +=2;
+                   break;
                }
-            
         }
         
         for ( let line = 0; line < raw_code.length; line++ ) {
            line_raw = raw_code[line].split(" ")
-          
+           // resolver erro do label ter um numeracao errada, pois esta contando linhas, nao comandos
            switch(line_raw.length) {
                 case 2:
                     if ( COMMDS[line_raw[0]] == undefined ){return `erro na linha: ${line}, comando inválido`;}
@@ -147,7 +150,8 @@ const code_prepare = {
                    if (raw_code[line] != 'main:') {ouputcode.push('lbl'); continue;}
                }
                ouputcode.push(raw_code[line])
-           }else{continue}
+           }
+           else{continue}
            
        }
        

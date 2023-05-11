@@ -72,7 +72,19 @@ body {
        font: 200 .9rem/1 monospace;
        padding: 4% 0 4% 2%;
    }
-   
+   .variables {
+        display: block;
+        width: 100%;
+        margin: auto auto;
+    }
+        .input-vars {
+            background-color: darkgray;
+            display: block;
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 3%;
+        }
    
 .ram-grafic {
     display: grid;
@@ -121,7 +133,7 @@ body {
         font: 50 1.2rem/1.2 fira_code;
         outline: none;
    }
-
+   
 .actions {
     position: absolute;
     top: 90%; left: 85%;
