@@ -46,8 +46,6 @@ const app = {
         let byte_cell = binary_code.findIndex(x => x == '80');
             byte_cell = ( byte_cell == -1 ) ? 0 : byte_cell;
                
-
-
         RUN_INTVL = setInterval(() => {
             let byte = binary_code[byte_cell];
             this.printd_ram(byte_cell)
@@ -72,9 +70,11 @@ const app = {
                 case 40: //HLT
                     clearInterval(RUN_INTVL);
                     RUN_STATE = false
+                    neander.ac = 0;
+                    this.pg_counter = 0;
                     document.getElementById('run-bnt').innerText = "RUN"
                     show_log.innerText = "programa encerrado"
-                    byte_cell += 1
+                    byte_cell = 0
                 break;
                 case 50: //ROTULO M
                     show_log.innerText = "rotulo main"
@@ -128,6 +128,8 @@ const app = {
     }
 }
 
+
+
 function get_variables() {
      let variables = document.getElementById('vars').value.replaceAll(" ","");
      const reg_lv0 = /([\d]{1,3}:[\d]{1,3})/gm
@@ -136,6 +138,29 @@ function get_variables() {
          return (vars.length > 0 ) ? vars : false
      }
      return false;
+}
+
+
+function save_code() {
+    let vars = document.getElementById('vars').value;
+    let code = document.getElementById('code').innerText;
+    
+    if ( vars.length > 0 & code.length > 0 ) {
+        window.localStorage.setItem("neander_code",code)
+        window.localStorage.setItem("neander_vars",vars)
+    }
+}
+
+function load_code() {
+     let code = window.localStorage.getItem("neander_code")
+     let vars = window.localStorage.getItem("neander_vars")
+     
+     try {
+         if (vars.length > 0 & code.length > 0) {
+            document.getElementById('vars').value = vars;
+            document.getElementById('code').innerText = code;
+         }
+     }catch(error){}
 }
 
 
@@ -156,7 +181,12 @@ function read_code() {
         return false;
     }
     
-    if ( RUN_STATE == false ){clearInterval(RUN_INTVL); return;}
+    if ( RUN_STATE == false ){
+        clearInterval(RUN_INTVL);
+        neander.ac = 0;
+        app.pg_counter = 0;
+        return;
+    }
 
     try {
         // tokenizando, analizando sintax e compilando
@@ -189,8 +219,11 @@ function read_code() {
     }
     
     app.execute_code(code_compiled,time_run);
+    save_code();
 }
 
+
+window.onload = function(){ load_code();}
 
 /*
 
