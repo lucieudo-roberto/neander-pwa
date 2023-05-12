@@ -70,8 +70,6 @@ const app = {
                 case 40: //HLT
                     clearInterval(RUN_INTVL);
                     RUN_STATE = false
-                    neander.ac = 0;
-                    this.pg_counter = 0;
                     document.getElementById('run-bnt').innerText = "RUN"
                     show_log.innerText = "programa encerrado"
                     byte_cell = 0
