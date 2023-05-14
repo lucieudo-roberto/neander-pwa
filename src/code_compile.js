@@ -31,6 +31,5 @@ function compiler(raw_code) {
            output.push(dec2x(opcodes[line]))
        }
     }
-    //console.table(output)
     return output.length > 1 ? output : false;
 }

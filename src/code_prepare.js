@@ -78,7 +78,7 @@ const code_prepare = {
         
         for ( let line = 0; line < raw_code.length; line++ ) {
            line_raw = raw_code[line].split(" ")
-           // resolver erro do label ter um numeracao errada, pois esta contando linhas, nao comandos
+           
            switch(line_raw.length) {
                 case 2:
                     if ( COMMDS[line_raw[0]] == undefined ){return `erro na linha: ${line}, comando inválido`;}

@@ -26,7 +26,6 @@ const neander = {
                     this.last_command = byte;
                     return 10
                 } else {
-                    //RAM[byte] = this.d2h(this.ac);
                     this.last_command = false
                     this.wait_operand = false
                     return 'a2r'
@@ -39,7 +38,6 @@ const neander = {
                     this.last_command = byte;
                     return 10
                 }else {
-                   // this.ac = this.h2d(RAM[byte]);
                     this.last_command = false
                     this.wait_operand = false
                     return 'r2a'
@@ -52,7 +50,6 @@ const neander = {
                     this.last_command = byte;
                     return 10
                 } else {
-                    //this.ac += this.h2d(RAM[byte]);
                     this.last_command = false
                     this.wait_operand = false
                     return 'aAr'
@@ -65,7 +62,6 @@ const neander = {
                     this.last_command = byte;
                     return 10
                 } else {
-                   // this.ac = ( this.ac | this.h2d(RAM[byte]) )
                     this.last_command = false
                     this.wait_operand = false
                     return 'aOr'

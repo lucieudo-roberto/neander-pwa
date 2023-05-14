@@ -222,32 +222,3 @@ function read_code() {
 
 
 window.onload = function(){ load_code();}
-
-/*
-
-main:
-  lda 80 ; A
-  add 80  
-  add 81 ; B
-  jn negativo
-  lda 80
-  add 80
-  add 81
-  sta 89
-  add 89
-  sta 83 ; C
-  lda 83
-  hlt
-
-negativo:
-    lda 80
-    add 80
-    not 
-    add 84 ; 1
-    add 82
-    add 82
-    sta 83
-    lda 83
-    hlt
-
-*/
